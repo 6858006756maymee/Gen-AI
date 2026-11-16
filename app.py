@@ -56,7 +56,20 @@ h2{font-size:1.65rem!important}h3{font-size:1.1rem!important}
 .tp-rule{border-top:1px solid #E9E5E6;margin:22px 0}
 .tp-output{background:#fff;border:1px solid #E8E4E6;border-radius:14px;padding:22px 28px;margin-bottom:20px}
 .tp-note{border-left:3px solid #B66A83;background:#F7F0F2;padding:14px 17px;color:#68545D;font-size:13px;border-radius:0 8px 8px 0}
-[data-testid="stTabs"] button[aria-selected="true"]{color:#96546B!important;border-bottom-color:#96546B!important}
+/* Editorial-style navigation: restrained rose accent, strong contrast */
+[data-testid="stTabs"] [data-baseweb="tab-list"]{gap:10px!important;background:#F4F0F1!important;border:1px solid #E7DFE2!important;padding:8px!important;border-radius:15px!important;flex-wrap:wrap!important}
+[data-testid="stTabs"] button[role="tab"]{background:transparent!important;color:#57515A!important;border:1px solid transparent!important;border-radius:10px!important;padding:13px 17px!important;min-height:48px!important;font-family:'Manrope',sans-serif!important;font-size:14px!important;font-weight:800!important;letter-spacing:-.025em!important;transition:background .18s ease,box-shadow .18s ease,color .18s ease!important}
+[data-testid="stTabs"] button[role="tab"]:hover{background:#FFFFFF!important;color:#30252D!important;border-color:#E3D5DB!important}
+[data-testid="stTabs"] button[role="tab"][aria-selected="true"]{background:#FFFFFF!important;color:#8D3F60!important;border:1px solid #E2C6D2!important;box-shadow:0 3px 12px rgba(83,36,55,.10)!important}
+[data-testid="stTabs"] [data-baseweb="tab-highlight"],[data-testid="stTabs"] [data-baseweb="tab-border"]{display:none!important}
+[data-testid="stTabs"] [data-baseweb="tab-panel"]{padding-top:26px!important}
+[data-testid="stTabs"] [data-baseweb="tab-panel"] h3{font-family:'Manrope',sans-serif!important;font-size:1.18rem!important;font-weight:800!important;color:#302A31!important;letter-spacing:-.035em!important;border-left:4px solid #B66A83!important;padding:9px 0 9px 16px!important;margin-top:12px!important;margin-bottom:18px!important;background:linear-gradient(90deg,#F9F0F3 0%,rgba(249,240,243,0) 85%)!important;border-radius:0 8px 8px 0!important}
+[data-testid="stTabs"] [data-baseweb="tab-panel"] p,[data-testid="stTabs"] [data-baseweb="tab-panel"] li{line-height:1.85!important}
+[data-testid="stTabs"] [data-baseweb="tab-panel"] hr{border-color:#ECE4E7!important;margin:24px 0!important}
+.tp-results-intro{display:flex;align-items:center;gap:12px;margin:22px 0 16px;padding:16px 19px;border-radius:12px;background:#FFFFFF;border:1px solid #E8E0E3;box-shadow:0 2px 10px rgba(37,29,33,.035)}
+.tp-results-mark{display:flex;align-items:center;justify-content:center;width:36px;height:36px;flex:none;border-radius:9px;background:#F4E5EB;color:#8D3F60;font-family:'Manrope',sans-serif;font-weight:800;font-size:15px}
+.tp-results-title{font-family:'Manrope',sans-serif;font-weight:800;font-size:14px;color:#302A31}
+.tp-results-subtitle{font-size:12px;color:#777077;margin-top:2px}
 </style>''',unsafe_allow_html=True)
 
 for k,v in {'step':1,'brand':'','product':'','audience':'','category':'Beauty','platform':'TikTok','tone':'Professional','goal':'Brand awareness','content':'','saved':[],'plan':''}.items():
@@ -146,7 +159,8 @@ else:
             title,_,body=part.partition('\n')
             sections[title.strip().lower()]=body.strip()
         if sections:
-            tabs=st.tabs(['Overview','Captions & hashtags','Video script','Marketing tips','Full content kit'])
+            st.markdown('<div class="tp-results-intro"><div class="tp-results-mark">TP</div><div><div class="tp-results-title">Campaign deliverables</div><div class="tp-results-subtitle">Select a section to review, copy or export your marketing content.</div></div></div>',unsafe_allow_html=True)
+            tabs=st.tabs(['Overview','Captions & Hashtags','Video Script','Marketing Tips','Full Content Kit'])
             groups=[['Campaign concept','Content ideas','Opening hooks'],['Captions','Hashtags','Call to action'],['Video script'],['Marketing recommendations'],headings]
             for tab,group in zip(tabs,groups):
                 with tab:
