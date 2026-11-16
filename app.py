@@ -141,9 +141,17 @@ h1{font-weight:800!important;letter-spacing:-.062em!important;font-size:clamp(2.
 .tp-result-banner h1{font-size:clamp(2rem,3.7vw,3.3rem)!important;margin:10px 0!important}
 .tp-pill{display:inline-block;background:#F5DFE8;border-radius:99px;color:#8B3D5D;font-size:11px;font-weight:800;letter-spacing:1px;padding:8px 12px}
 @media(max-width:700px){.tp-hero{padding:25px 19px}.tp-feature-strip{grid-template-columns:1fr!important}.tp-section-hero{padding:23px 19px}.tp-image{height:200px}.tp-tag{display:none!important}}
+
+/* Brand-neutral illustrations: pure CSS, no image files */
+.tp-abstract{min-height:255px;border:1px solid #efdde5;border-radius:22px;background:radial-gradient(circle at 80% 15%,#e8bbce 0,transparent 32%),linear-gradient(135deg,#fff6f9,#f3e0e9);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:25px;box-shadow:0 12px 35px rgba(93,48,69,.06)}
+.tp-abstract:before{content:'';position:absolute;width:180px;height:180px;border:22px solid rgba(151,74,108,.14);border-radius:40px;transform:rotate(30deg);top:-55px;right:-35px}
+.tp-abstract:after{content:'';position:absolute;width:105px;height:105px;border-radius:50%;background:rgba(182,106,131,.13);top:55px;left:35px}
+.tp-abstract .tp-abstract-label{font-family:'Plus Jakarta Sans',sans-serif;font-size:27px;font-weight:800;letter-spacing:-.06em;color:#7e3f5d;position:relative;z-index:1}
+.tp-abstract .tp-abstract-sub{font-size:12px;color:#805e70;position:relative;z-index:1;margin-top:7px}
+.tp-abstract.compact{min-height:170px;padding:20px}.tp-abstract.compact .tp-abstract-label{font-size:20px}
 </style>''',unsafe_allow_html=True)
 
-for k,v in {'step':1,'brand':'','product':'','audience':'','category':'Beauty','platform':'TikTok','tone':'Professional','goal':'Brand awareness','content':'','saved':[],'plan':''}.items():
+for k,v in {'step':1,'brand':'','product':'','audience':'','category':'Other','platform':'TikTok','tone':'Professional','goal':'Brand awareness','content':'','saved':[],'plan':''}.items():
     if k not in st.session_state: st.session_state[k]=v
 
 def move(step):
@@ -163,17 +171,16 @@ if step==1:
     st.markdown('<div class="tp-card-heading">Tell us about your brand</div><div class="tp-card-sub">The more details you provide, the more relevant your content will be.</div>',unsafe_allow_html=True)
     visual,fields=st.columns([1,2.2],gap='large')
     with visual:
-        st.image(str(__import__('pathlib').Path(__file__).parent/'brand_visual.png'),use_container_width=True)
-        st.caption('Illustrative brand visual · LUMI SKIN example')
+        st.markdown('<div class="tp-abstract"><div class="tp-abstract-label">Your brand.<br>Your story.</div><div class="tp-abstract-sub">One workspace. Every industry.</div></div>',unsafe_allow_html=True)
     with fields:
         with st.form('brand_form'):
             a,b=st.columns(2)
             with a:
-                brand=st.text_input('Brand name *',value=st.session_state.brand,placeholder='e.g. LUMI SKIN')
-                category=st.selectbox('Industry',['Beauty','Food','Education','Fashion','Business'],index=['Beauty','Food','Education','Fashion','Business'].index(st.session_state.category))
-                platform=st.selectbox('Main platform',['TikTok','Instagram','YouTube','All'],index=['TikTok','Instagram','YouTube','All'].index(st.session_state.platform))
+                brand=st.text_input('Brand name *',value=st.session_state.brand,placeholder='e.g. Your brand name')
+                category=st.selectbox('Industry',['Other','Beauty','Food & Beverage','Education','Fashion','Technology','Retail','Travel','Health & Wellness','Finance','Entertainment','Business Services'],index=['Other','Beauty','Food & Beverage','Education','Fashion','Technology','Retail','Travel','Health & Wellness','Finance','Entertainment','Business Services'].index(st.session_state.category))
+                platform=st.selectbox('Main platform',['TikTok','Instagram','YouTube','Facebook','LinkedIn','All'],index=['TikTok','Instagram','YouTube','Facebook','LinkedIn','All'].index(st.session_state.platform))
             with b:
-                product=st.text_input('Product / service *',value=st.session_state.product,placeholder='e.g. Hydrating Glow Serum')
+                product=st.text_input('Product / service *',value=st.session_state.product,placeholder='e.g. Your product or service')
                 audience=st.text_input('Target audience *',value=st.session_state.audience,placeholder='e.g. University students aged 18–25')
                 tone=st.selectbox('Brand voice',['Professional','Friendly','Fun','Minimal','Bold','Luxury'],index=['Professional','Friendly','Fun','Minimal','Bold','Luxury'].index(st.session_state.tone))
             submitted=st.form_submit_button('Continue  →',type='primary',use_container_width=True)
@@ -189,8 +196,7 @@ elif step==2:
     st.markdown(f'<p class="tp-lead">Choose the type of content you want to create for <b>{__import__("html").escape(st.session_state.brand)}</b>. TrendPilot will prepare a campaign concept, captions, hashtags, and an actionable content script.</p>',unsafe_allow_html=True)
     left_visual, right_intro = st.columns([1,2.5],gap='large')
     with left_visual:
-        st.image(str(__import__('pathlib').Path(__file__).parent/'campaign_visual.png'),use_container_width=True)
-        st.caption('Illustrative campaign inspiration')
+        st.markdown('<div class="tp-abstract"><div class="tp-abstract-label">Create with<br>purpose.</div><div class="tp-abstract-sub">Ideas · Captions · Scripts · Strategy</div></div>',unsafe_allow_html=True)
     with right_intro:
         st.markdown('<div class="tp-card-heading">Your creative direction</div><div class="tp-card-sub">Personalize the content kit for your audience and platform.</div>',unsafe_allow_html=True)
     with st.form('campaign_form'):
@@ -249,7 +255,7 @@ else:
                     if group==groups[0]:
                         a_visual,a_text=st.columns([1,3],gap='medium')
                         with a_visual:
-                            st.image(str(__import__('pathlib').Path(__file__).parent/'results_visual.png'),use_container_width=True)
+                            st.markdown('<div class="tp-abstract compact"><div class="tp-abstract-label">Your next<br>big idea.</div><div class="tp-abstract-sub">Campaign overview</div></div>',unsafe_allow_html=True)
                         with a_text:
                             st.markdown('**CAMPAIGN OVERVIEW**')
                             st.markdown('Explore the campaign concept, content ideas and hooks below. Switch tabs for ready-to-post assets.')
